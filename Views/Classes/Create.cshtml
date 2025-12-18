@@ -1,0 +1,81 @@
+﻿@model School_of_arts.Models.Class
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Створити</h1>
+
+<h4>Група</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ClassName" class="control-label"></label>
+                <input asp-for="ClassName" class="form-control" />
+                <span asp-validation-for="ClassName" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="CuratorId" class="control-label">Куратор (Класний керівник)</label>
+                @{
+                    var teacherList = ViewBag.CuratorId as SelectList;
+                }
+                @if (teacherList != null && teacherList.Any())
+                {
+                    <select asp-for="CuratorId" class="form-control" asp-items="ViewBag.CuratorId"></select>
+                }
+                else
+                {
+                    <div class="alert alert-danger mt-2">
+                        Немає вчителів для призначення куратором.
+                        <a asp-controller="Teachers" asp-action="Create" class="alert-link">Додати викладача</a>.
+                    </div>
+                }
+            </div>
+            <div class="form-group">
+                <label asp-for="StudyYear" class="control-label"></label>
+                <input asp-for="StudyYear" class="form-control" />
+                <span asp-validation-for="StudyYear" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SpecialtyId" class="control-label"></label>
+                <select asp-for="SpecialtyId" class ="form-control" asp-items="ViewBag.SpecialtyId"></select>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="DepartmentId" class="control-label">Відділ</label>
+                @{
+                    var deptList = ViewBag.DepartmentId as SelectList;
+                }
+                @if (deptList != null && deptList.Any())
+                {
+                    <select asp-for="DepartmentId" class="form-control" asp-items="ViewBag.DepartmentId"></select>
+                }
+                else
+                {
+                    <div class="alert alert-warning mt-2">
+                        Список відділів порожній.
+                        <a asp-controller="Departments" asp-action="Create" class="alert-link">Створити відділ</a>.
+                    </div>
+                }
+            </div>
+            <div class="form-group">
+                <label asp-for="TermYears" class="control-label"></label>
+                <input asp-for="TermYears" class="form-control" />
+                <span asp-validation-for="TermYears" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Повернутись до списку</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

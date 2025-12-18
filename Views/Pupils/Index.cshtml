@@ -1,0 +1,108 @@
+﻿@model IEnumerable<School_of_arts.Models.Pupil>
+
+@{
+    ViewData["Title"] = "Учні";
+}
+
+<h1>Учні</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">
+        <i class="bi bi-person-plus"></i> Додати учня
+    </a>
+</p>
+
+<div class="card mb-4 border-primary">
+    <div class="card-header bg-primary text-white">
+        <h5 class="mb-0">🔍 Пошук учнів</h5>
+    </div>
+    <div class="card-body bg-light">
+        <form asp-action="Index" method="get">
+            <div class="row g-3">
+
+                <div class="col-md-4">
+                    <label class="form-label fw-bold">ПІБ Учня:</label>
+                    <input type="text" name="searchName" class="form-control"
+                           value="@ViewData["CurrentName"]" placeholder="Прізвище..." />
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label fw-bold">Клас:</label>
+                    <select name="classId" class="form-select" asp-items="ViewBag.ClassList">
+                        <option value="">— Всі класи —</option>
+                    </select>
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label fw-bold">Дата народження:</label>
+                    <div class="input-group">
+                        <input type="date" name="dateFrom" class="form-control"
+                               value="@ViewData["DateFrom"]" title="З">
+                        <span class="input-group-text">-</span>
+                        <input type="date" name="dateTo" class="form-control"
+                               value="@ViewData["DateTo"]" title="По">
+                    </div>
+                </div>
+
+                <div class="col-12 text-end mt-3">
+                    <a asp-action="Index" class="btn btn-secondary me-2">Скинути</a>
+                    <button type="submit" class="btn btn-primary px-4">
+                        <i class="bi bi-search"></i> Знайти
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@if (ViewData["Count"] != null)
+{
+    <div class="alert alert-info py-2">
+        Знайдено учнів: <strong>@ViewData["Count"]</strong>
+    </div>
+}
+
+<table class="table table-striped table-hover">
+    <thead class="table-light">
+        <tr>
+            <th>ПІБ Учня</th>
+            <th>Клас</th>
+            <th>Номер телефону</th>
+            <th>Дата народження</th>
+            <th>Дії</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.FullName)</td>
+
+                <td>
+                    <span class="badge bg-info text-dark">
+                        @Html.DisplayFor(modelItem => item.Class.ClassName)
+                    </span>
+                </td>
+
+                <td>@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
+
+                <td>@item.Birthdate.ToString("dd.MM.yyyy")</td>
+
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.PupilId">Виправити</a> |
+                    <a asp-action="Details" asp-route-id="@item.PupilId">Інформація</a> |
+                    <a asp-action="Delete" asp-route-id="@item.PupilId">Видалити</a>
+                </td>
+            </tr>
+        }
+
+        @if (!Model.Any())
+        {
+            <tr>
+                <td colspan="5" class="text-center text-muted py-3">
+                    Учнів не знайдено
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,62 @@
+﻿@model School_of_arts.Models.Pupil
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Створити</h1>
+
+<h4>Учень</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="FullName" class="control-label"></label>
+                <input asp-for="FullName" class="form-control" />
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="ClassId" class="control-label">Клас</label>
+                @{
+                    var classList = ViewBag.ClassId as SelectList;
+                }
+                @if (classList != null && classList.Any())
+                {
+                    <select asp-for="ClassId" class="form-control" asp-items="ViewBag.ClassId"></select>
+                }
+                else
+                {
+                    <div class="alert alert-warning mt-2">
+                        <i class="bi bi-exclamation-triangle"></i> Увага! Список класів порожній.
+                        <br />
+                        Будь ласка, спочатку <a asp-controller="Classes" asp-action="Create" class="alert-link">створіть хоча б один клас</a>.
+                    </div>
+                }
+                <span asp-validation-for="ClassId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber" class="control-label"></label>
+                <input asp-for="PhoneNumber" class="form-control" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Birthdate" class="control-label"></label>
+                <input asp-for="Birthdate" class="form-control" />
+                <span asp-validation-for="Birthdate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Повернутися до списку</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

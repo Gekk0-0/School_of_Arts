@@ -1,0 +1,48 @@
+﻿@model School_of_arts.Models.Mark
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Подробиці</h1>
+
+<div>
+    <h4>Оцінка</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Mark1)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Mark1)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IsPresent)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IsPresent)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RatingDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RatingDate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Discipline)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Discipline.DisciplineId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Pupil)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Pupil.PupilId)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.MarkId">Edit</a> |
+    <a asp-action="Index">Повернутися до списку</a>
+</div>

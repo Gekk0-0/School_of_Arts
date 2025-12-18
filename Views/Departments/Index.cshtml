@@ -1,0 +1,32 @@
+﻿@model IEnumerable<School_of_arts.Models.Department>
+
+@{
+    ViewData["Title"] = "Departments";
+}
+
+<h1>Відділи</h1>
+
+<p>
+    <a asp-action="Create">Додати відділ</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Назва відділу</th>
+            <th>Дії</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.DepartmentName)</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.DepartmentId">Виправити</a> |
+                    <a asp-action="Details" asp-route-id="@item.DepartmentId">Інформація</a> |
+                    <a asp-action="Delete" asp-route-id="@item.DepartmentId">Видалити</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

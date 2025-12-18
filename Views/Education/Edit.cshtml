@@ -1,0 +1,57 @@
+﻿@model School_of_arts.Models.Education
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Виправити</h1>
+
+<h4>Викладання</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="EducationId" />
+            <div class="form-group">
+                <label asp-for="TeacherId" class="control-label"></label>
+                <select asp-for="TeacherId" class="form-control" asp-items="ViewBag.TeacherId"></select>
+                <span asp-validation-for="TeacherId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DisciplineId" class="control-label"></label>
+                <select asp-for="DisciplineId" class="form-control" asp-items="ViewBag.DisciplineId"></select>
+                <span asp-validation-for="DisciplineId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LessonType" class="control-label"></label>
+                <input asp-for="LessonType" class="form-control" />
+                <span asp-validation-for="LessonType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Semester" class="control-label"></label>
+                <input asp-for="Semester" class="form-control" />
+                <span asp-validation-for="Semester" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HoursPerSemester" class="control-label"></label>
+                <input asp-for="HoursPerSemester" class="form-control" />
+                <span asp-validation-for="HoursPerSemester" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Повернутись до списку</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="~/js/decimal-fix.js"></script>
+}

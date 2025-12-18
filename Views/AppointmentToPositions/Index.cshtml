@@ -1,0 +1,42 @@
+﻿@model IEnumerable<School_of_arts.Models.AppointmentToPosition>
+
+@{
+    ViewData["Title"] = "Appointment to position";
+}
+
+<h1>Призначення на посаду</h1>
+
+<p>
+    <a asp-action="Create">Додати призначення</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Статус</th>
+            <th>Дата призначення</th>
+            <th>Дата звільнення</th>
+            <th>Викладач</th>
+            <th>Посада</th>
+            <th>Дії</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.PositionStatus)</td>
+                <td>@item.AppointmentDate.ToShortDateString()</td>
+                <td>
+                    @(item.DismissalDate.HasValue ? item.DismissalDate.Value.ToShortDateString() : "-")
+                </td>
+                <td>@Html.DisplayFor(modelItem => item.Teacher.FullName)</td>
+                <td>@Html.DisplayFor(modelItem => item.Post.PositionName)</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.AppointmentToPositionId">Виправити</a> |
+                    <a asp-action="Details" asp-route-id="@item.AppointmentToPositionId">Інформація</a> |
+                    <a asp-action="Delete" asp-route-id="@item.AppointmentToPositionId">Видалити</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,48 @@
+﻿/* --- СТИЛІ АДМІН-ПАНЕЛІ (School of Arts) --- */
+
+/* Картка фільтрації */
+.admin-card {
+    border: 1px solid #0d6efd; /* Синя рамка (border-primary) */
+    margin-bottom: 1.5rem;
+    border-radius: 0.375rem;
+    overflow: hidden;
+}
+
+.admin-card-header {
+    background-color: #0d6efd; /* Синій фон (bg-primary) */
+    color: white;
+    padding: 0.5rem 1rem;
+}
+
+.admin-card-title {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+.admin-card-body {
+    background-color: #f8f9fa; /* Світлий фон (bg-light) */
+    padding: 1rem;
+}
+
+/* Кнопка створення (Зелена) */
+.btn-create {
+    background-color: #198754;
+    border-color: #198754;
+    color: white;
+    text-decoration: none;
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.25rem;
+    transition: background-color 0.15s;
+}
+
+    .btn-create:hover {
+        background-color: #157347;
+        color: white;
+    }
+
+/* Шапка таблиці */
+.admin-table-head {
+    background-color: #f8f9fa; /* table-light */
+    border-bottom: 2px solid #dee2e6;
+}
